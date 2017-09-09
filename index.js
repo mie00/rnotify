@@ -11,9 +11,11 @@ module.exports = function(cfg) {
         .map(f => {
             var name = f.substr(0, f.length - '.js'.length);
             var m = require('./' + path.join('plugins', f));
-            mm = m(cfg[name]);
-            mm.name = name;
-            return mm;
+            return Promise.resolve(m(cfg[name]))
+                .then(mm => {
+                    mm.name = name;
+                    return mm;
+                });
         })
         .then(l => {
             var plugins = {};
