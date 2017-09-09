@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "rnotify": "./cli"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mie00/rnotify.git"
@@ -22,6 +25,7 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "node-telegram-bot-api": "^0.28.0",
-    "nodemailer": "^4.1.0"
+    "nodemailer": "^4.1.0",
+    "yargs": "^8.0.2"
   }
 }

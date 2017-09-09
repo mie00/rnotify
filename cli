@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+
+var rnotify = require('./index');
+const path = require('path');
+const Promise = require('bluebird');
+const fs = Promise.promisifyAll(require('fs'));
+
+const argv = require('yargs') // eslint-disable-line 
+.usage('Usage: $0 [options] message')
+.options({
+    senders: {
+        alias: 's',
+        description: 'Senders configuration file',
+        default: path.join(process.env.HOME, '/.config/rnotify/senders'),
+        requiresArg: true,
+    },
+    receivers: {
+        alias: 'r',
+        description: 'Receivers configuration file',
+        default: path.join(process.env.HOME, '/.config/rnotify/receivers'),
+        requiresArg: true,
+    },
+    title: {
+        alias: 't',
+        description: 'Title',
+        default: null,
+        requiresArg: true,
+    },
+})
+.demandCommand(1)
+.alias('h', 'help')
+.help()
+.argv;
+
+Promise.join(fs.readFileAsync(argv.senders), fs.readFileAsync(argv.receivers))
+    .then(function(s) {
+        const senders = JSON.parse(s[0]);
+        const receivers = JSON.parse(s[1]);
+        return rnotify(senders).then(p => {
+            return p.send(argv.title, argv._[0], receivers);
+        });
+    })
+    .then(function(){});
