@@ -1,0 +1,26 @@
+{
+  "name": "rnotify",
+  "version": "1.0.0",
+  "description": "a pluggable notification library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mie00/rnotify.git"
+  },
+  "keywords": [
+    "notification"
+  ],
+  "author": "Mohamed Elawadi <mohamed@elawadi.net>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/mie00/rnotify/issues"
+  },
+  "homepage": "https://github.com/mie00/rnotify#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "node-telegram-bot-api": "^0.28.0"
+  }
+}
