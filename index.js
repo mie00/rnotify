@@ -20,15 +20,17 @@ module.exports = function(cfg) {
             for (var e of l) {
                 plugins[e.name] = e;
             }
-            // TODO: Find a better way to implement a global send
-            // var send = function() {
-            //     return Promise.resolve(plugins)
-            //         .then(p => Object.keys(p))
-            //         .map(k => plugins[k])
-            //         .filter(v => v.send)
-            //         .map(v => v.send.apply(v, arguments));
-            // };
-            // plugins.send = send;
+            var send = function(title, message, args) {
+                return Promise.resolve(plugins)
+                    .then(p => Object.keys(p))
+                    .map(k => plugins[k])
+                    .filter(v => v.send && args[v.name])
+                    .map(v => {
+                        return Promise.resolve(args[v.name])
+                            .map(c => v.send(title, message, c));
+                    });
+            };
+            plugins.send = send;
             return plugins;
         });
 };
