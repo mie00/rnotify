@@ -7,8 +7,10 @@ module.exports = function(cfg) {
         .then(me => {
             return {
                 send: function(title, msg, to) {
-                    return bot.sendMessage(to, title)
-                        .then(_ => bot.sendMessage(to, msg))
+                    p = Promise.resolve();
+                    if (title)
+                        p = bot.sendMessage(to, title);
+                    return p.then(_ => bot.sendMessage(to, msg))
                         .catch(e => {
                             if (e.code === 'ETELEGRAM' && e.response && e.response.statusCode == 400 &&
                                 e.response.body && e.response.body.description === 'Bad Request: chat not found') {
