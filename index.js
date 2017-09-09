@@ -6,7 +6,7 @@ const fs = Promise.promisifyAll(require('fs'));
 const path = require('path');
 
 module.exports = function(cfg) {
-    return fs.readdirAsync('./plugins')
+    return fs.readdirAsync(path.join(__dirname, 'plugins'))
         .filter(f => f.endsWith('.js'))
         .map(f => {
             var name = f.substr(0, f.length - '.js'.length);
