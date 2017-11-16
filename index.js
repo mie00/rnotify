@@ -10,6 +10,7 @@ module.exports = function(cfg) {
         .filter(f => f.endsWith('.js'))
         .map(f => {
             var name = f.substr(0, f.length - '.js'.length);
+            if (!cfg[name]) return;
             var m = require('./' + path.join('plugins', f));
             return Promise.resolve(m(cfg[name]))
                 .then(mm => {
@@ -17,6 +18,7 @@ module.exports = function(cfg) {
                     return mm;
                 });
         })
+        .filter((x) => (x))
         .then(l => {
             var plugins = {};
             for (var e of l) {
