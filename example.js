@@ -9,7 +9,7 @@ rnotify({
         password: 'YOUR_PASSWORD',
         from: 'YOUR_NAME',
     },
-    {
+    twilio: {
         "from": "TWILIO_PHONE_NUMBER",
         "accountSid": "TWILIO_ACCOUNT_SID",
         "authToken": "TWILIO_AUTH_TOCKEN"
