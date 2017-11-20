@@ -13,7 +13,7 @@ module.exports = function(cfg) {
             let mailOptions = {
                 from: (cfg.from?'"' + cfg.from + '" ':'') + ('<' + cfg.email + '>'),
                 to: to,
-                subject: '',
+                subject: title,
                 text: msg,
             };
             return transporter.sendMailAsync(mailOptions);
