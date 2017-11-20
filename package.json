@@ -24,6 +24,7 @@
   "homepage": "https://github.com/mie00/rnotify#readme",
   "dependencies": {
     "bluebird": "^3.5.0",
+    "facebook-chat-api": "^1.4.0",
     "node-telegram-bot-api": "^0.28.0",
     "nodemailer": "^4.1.0",
     "twilio": "^3.10.0",
